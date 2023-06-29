@@ -16,27 +16,15 @@ services:
     depends_on:
       - postgres
     environment:
-      STORING_INTERVAL: 5
-      # MQTT_BROKER_URL: nanomq
-      # MQTT_TOPIC: inverter
-      AHOY_DTU_URL: http://192.168.178.37
-      DB_HOST: "postgres"
+      DB_HOST: postgres
       DB_PORT: 5432
       DB_NAME: pv
       DB_USER: pv-user
       DB_PASSWORD: pvuser123!!
+      AHOY_DTU_URL: http://192.168.178.37
+      STORING_INTERVAL: 5
     networks:
       - backend
-  # nanomq:
-  #   image: emqx/nanomq:latest
-  #   restart: always
-  #   ports:
-  #     - "1883:1883"
-  #     - "8883:8883"
-  #   environment:
-  #     NANOMQ_LOG_LEVEL: trace
-  #   networks:
-  #     - network
   postgres:
     image: postgres:15-alpine
     restart: always
