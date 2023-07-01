@@ -1,12 +1,10 @@
 FROM node:18-alpine as build
 WORKDIR /usr/src/app
-COPY package.json yarn.lock ./
-ENV NODE_ENV=production
-RUN yarn --frozen-lockfile
+COPY package.json ./
+RUN yarn install
 COPY . .
 RUN yarn build
 RUN npm prune --production
-
 FROM node:18-alpine as production
 ARG PORT
 ENV PORT=$PORT
